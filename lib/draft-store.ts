@@ -1,0 +1,5 @@
+import {parseProject,PROJECT_FORMAT,type InkDoc} from './ink-engine';
+// IndexedDB has room for backdrop photos and writes without synchronous JSON work.
+function database():Promise<IDBDatabase>{return new Promise((resolve,reject)=>{const r=indexedDB.open('kmoji-studio',1);r.onupgradeneeded=()=>r.result.createObjectStore('drafts');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Storage busy'));});}
+export async function readDraft():Promise<InkDoc|null>{const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('drafts','readonly'),r=tx.objectStore('drafts').get('latest');tx.oncomplete=()=>{db.close();try{resolve(r.result?parseProject(JSON.stringify(r.result)):null);}catch(e){reject(e);}};tx.onerror=()=>{db.close();reject(tx.error);};});}
+export async function writeDraft(doc:InkDoc):Promise<void>{const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put({format:PROJECT_FORMAT,document:doc},'latest');tx.oncomplete=()=>{db.close();resolve();};tx.onabort=tx.onerror=()=>{db.close();reject(tx.error);};});}

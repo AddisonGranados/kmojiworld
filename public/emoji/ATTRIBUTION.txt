@@ -1,0 +1,4 @@
+Apple emoji artwork from emoji-datasource-apple 16.0.0.
+Source: https://github.com/iamcal/emoji-data
+Emoji artwork copyright Apple Inc. Metadata and tooling: Cal Henderson, MIT.
+The software license does not transfer ownership of Apple artwork.
