@@ -68,5 +68,6 @@ test('every palette emoji and category icon has Apple artwork',async()=>{
  for(const e of EMOJIS)assert.ok(APPLE_ATLAS.coordinates[e.glyph],e.glyph);
  for(const c of CATEGORIES.filter(c=>c.name!=='All'))assert.ok(APPLE_ATLAS.coordinates[c.glyph],c.glyph);
  const {stat}=await import('node:fs/promises');
- assert.ok((await stat(new URL('../public'+APPLE_ATLAS.src,import.meta.url))).size>1000);
+ assert.ok((await stat(new URL('../public/'+APPLE_ATLAS.src.replace(/^\.?\//,''),import.meta.url))).size>1000);
 });
+

@@ -17,3 +17,5 @@ Autosaves remain on the same browser and domain. Use Save / Open → Download pr
 ## Attribution
 
 Apple emoji artwork and upstream metadata credits are in public/emoji/ATTRIBUTION.txt and LICENSE.txt. UI CSS license is in vendor/.
+
+Temporary hosting: the app currently uses /kmojiworld/ on addisongranados.github.io. To reconnect kmoji.world, set Vite base to / and restore the custom domain in GitHub Pages. Assets use relative paths for both locations.
